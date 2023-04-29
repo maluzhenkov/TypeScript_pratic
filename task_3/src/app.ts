@@ -7,12 +7,12 @@ interface ICommentData {
   email: string;
 }
 
-const getData = async (url: string) => {
-  return fetch(url).then((response) => response.json() as Promise<ICommentData[]>);
+const getData = async <T>(url: string): Promise<T> => {
+  return fetch(url).then((response) => response.json() as Promise<T>);
 };
 
-getData(COMMENTS_URL).then((data) => {
-  console.log(data.map(({id, email}) => ({id, email})));
+getData<ICommentData[]>(COMMENTS_URL).then((data) => {
+  console.log(data.map(({ id, email }) => ({ id, email })));
 });
 
 /**
